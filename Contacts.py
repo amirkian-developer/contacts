@@ -40,10 +40,22 @@ def validate_phone(phone_number: str):
         else:
             _phone_number = str(input("This PhoneNumber is not valid!\nPlease try again or enter (cancel) to exit: \n"))
 
+def validate_name(name:str):
+    _name = name
+    while True:
+        if _name == "cancel":
+            return False
+        if _name not in contacts:
+            return _name
+        else:
+            _name = str(input("This Name is already exist!\nPlease try again or enter (cancel) to exit: \n"))
+    
 
 
 def add_contact(contacts):
-    name = input("Enter Name:")
+    name = validate_name(input("Enter Name:"))
+    if name == False:
+        return
     phone = validate_phone(input("Enter Phone:"))
     if phone == False:
         return
@@ -105,7 +117,7 @@ def display_sorted_contacts(contacts):
 
 contacts = load_contacts()
 while True:
-    print("\nContacts Menue:")
+    print("\n* Contacts Menue:")
     print("1 --> Add Contact")
     print("2 --> Edit Contact")
     print("3 --> Remove Contact")
